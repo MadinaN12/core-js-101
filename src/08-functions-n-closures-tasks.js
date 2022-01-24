@@ -171,8 +171,15 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  function counter() {
+    counter.currentCount += 1;
+    return counter.currentCount;
+  }
+  counter.currentCount = startFrom;
+  if (counter.currentCount === startFrom) counter.currentCount = startFrom - 1;
+
+  return counter;
 }
 
 
